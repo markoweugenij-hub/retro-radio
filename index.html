@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ретро Радіо Плеєр</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="main-layout">
+        <!-- ЛІВА ЧАСТИНА: Анімоване Радіо -->
+        <div class="radio-visual-box">
+            <div class="retro-radio-body" id="radio-body">
+                <div class="radio-antenna"></div>
+                <div class="radio-speaker-left"></div>
+                <div class="radio-speaker-right"></div>
+                <div class="radio-handle"></div>
+            </div>
+        </div>
+
+        <!-- ЦЕНТР: Головний екран та керування -->
+        <div class="radio-container">
+            <div class="radio-screen">
+                <div class="noise-overlay"></div>
+                <h1 id="track-title">Знайдіть трек</h1>
+                <p id="track-status">Радіо вимкнено</p>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Введіть назву пісні або виконавця...">
+                <button id="play-btn">Шукати та увімкнути</button>
+            </div>
+
+            <div class="controls">
+                <label for="noise-volume">Рівень перешкод радіо:</label>
+                <input type="range" id="noise-volume" min="0" max="1" step="0.1" value="0.4">
+            </div>
+            
+            <button id="add-to-playlist">Додати до плейлиста</button>
+        </div>
+
+        <!-- ПРАВА ЧАСТИНА: Плейлист -->
+        <div class="playlist-section">
+            <h3>Мій Плейлист</h3>
+            <ul id="playlist-items"></ul>
+        </div>
+    </div>
+
+    <!-- Контейнер-невидимка для відео YouTube -->
+    <div id="yt-player-invisible" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px;"></div>
+
+    <script src="https://youtube.com"></script>
+    <script src="app.js"></script>
+</body>
+</html>

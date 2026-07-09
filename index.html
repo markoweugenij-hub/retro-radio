@@ -22,22 +22,19 @@
         <!-- ЦЕНТР: Головний екран та керування -->
         <div class="radio-container">
             <div class="radio-screen">
-                <!-- Шум накладається ПОВЕРХ відео для ефекту старого ТБ -->
                 <div class="noise-overlay"></div>
-                
                 <div class="screen-info">
                     <h1 id="track-title">Знайдіть трек</h1>
                     <p id="track-status">Радіо вимкнено</p>
                 </div>
-
-                <!-- Наш стильний неоновий телик для кліпу -->
-                <div class="tv-frame">
-                    <div id="yt-player-visible"></div>
+                <!-- Рамка для офіційного плеєра музичної бази -->
+                <div class="tv-frame" id="music-frame">
+                    <div style="color:#00ff66; text-align:center; padding-top:45px; font-size:12px;">РАДІО ПРИЙМАЧ</div>
                 </div>
             </div>
 
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="Введіть назву пісні чи кліпу...">
+                <input type="text" id="search-input" placeholder="Введіть будь-яку пісню світу...">
                 <button id="play-btn">Увімкнути радіохвилю</button>
             </div>
 
@@ -56,8 +53,6 @@
         </div>
     </div>
 
-    <!-- Підключаємо офіційне API YouTube -->
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="app.js"></script>
 </body>
 </html>

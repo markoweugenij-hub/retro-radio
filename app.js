@@ -3,6 +3,7 @@ let noiseNode;
 let noiseGain;
 let youtubePlayer;
 
+// Завантажуємо плейлист із пам'яті пристрою
 let myPlaylist = JSON.parse(localStorage.getItem('radio_playlist')) || [];
 
 const playBtn = document.getElementById('play-btn');
@@ -12,6 +13,7 @@ const addToPlaylistBtn = document.getElementById('add-to-playlist');
 const playlistItems = document.getElementById('playlist-items');
 const radioBody = document.getElementById('radio-body');
 
+// Ініціалізація офіційного плеєра YouTube
 window.onYouTubeIframeAPIReady = function() {
     youtubePlayer = new YT.Player('yt-player-visible', {
         height: '100%',
@@ -60,17 +62,17 @@ function initRadioNoise() {
     }
 }
 
-// Залізобетонний пошук без помилок Playback ID
+// Залізобетонна логіка відтворення через офіційні потоки YouTube
 playBtn.addEventListener('click', () => {
     const query = searchInput.value.trim();
     if (query) {
-        initRadioNoise(); // Миттєво вмикаємо тріск радіо хвилі
+        initRadioNoise(); // 1. Миттєво вмикаємо тріск радіо хвилі
         
         document.getElementById('track-title').innerText = query;
         document.getElementById('track-status').innerText = "Сигнал радіо стабільний";
         radioBody.classList.add('playing-animation');
 
-        // Використовуємо офіційну вбудовану систему пошуку YouTube: вона сама шукає назву і відтворює перший трек прямо в iframe
+        // 2. Використовуємо надійне офіційне вбудовування плейлиста через пошуковий запит
         const tvScreen = document.getElementById('yt-player-visible');
         tvScreen.innerHTML = `<iframe width="100%" height="100%" src="https://youtube.com{encodeURIComponent(query)}&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>`;
     }

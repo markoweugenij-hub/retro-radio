@@ -22,14 +22,23 @@
         <!-- ЦЕНТР: Головний екран та керування -->
         <div class="radio-container">
             <div class="radio-screen">
+                <!-- Шум накладається ПОВЕРХ відео для ефекту старого ТБ -->
                 <div class="noise-overlay"></div>
-                <h1 id="track-title">Знайдіть трек</h1>
-                <p id="track-status">Радіо вимкнено</p>
+                
+                <div class="screen-info">
+                    <h1 id="track-title">Знайдіть трек</h1>
+                    <p id="track-status">Радіо вимкнено</p>
+                </div>
+
+                <!-- Наш стильний неоновий телик для кліпу -->
+                <div class="tv-frame">
+                    <div id="yt-player-visible"></div>
+                </div>
             </div>
 
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="Введіть назву пісні або виконавця...">
-                <button id="play-btn">Шукати та увімкнути</button>
+                <input type="text" id="search-input" placeholder="Введіть назву пісні чи кліпу...">
+                <button id="play-btn">Увімкнути радіохвилю</button>
             </div>
 
             <div class="controls">
@@ -47,10 +56,8 @@
         </div>
     </div>
 
-    <!-- Контейнер-невидимка для відео YouTube -->
-    <div id="yt-player-invisible" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px;"></div>
-
-    <script src="https://youtube.com"></script>
+    <!-- Підключаємо офіційне API YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="app.js"></script>
 </body>
 </html>

@@ -12,7 +12,6 @@ const addToPlaylistBtn = document.getElementById('add-to-playlist');
 const playlistItems = document.getElementById('playlist-items');
 const radioBody = document.getElementById('radio-body');
 
-// Ініціалізація видимого програвача YouTube всередині неонової рамочки
 window.onYouTubeIframeAPIReady = function() {
     youtubePlayer = new YT.Player('yt-player-visible', {
         height: '100%',
@@ -20,7 +19,7 @@ window.onYouTubeIframeAPIReady = function() {
         videoId: '', 
         playerVars: {
             'autoplay': 1,
-            'controls': 1, // Дозволяємо користувачу самому клацати паузу/старт на відео
+            'controls': 1,
             'modestbranding': 1,
             'rel': 0
         },
@@ -61,41 +60,19 @@ function initRadioNoise() {
     }
 }
 
-// Стабільний пошук по всьому YouTube за допомогою відкритого API (без блокувань)
-async function searchAndPlayWithTV(trackName) {
-    document.getElementById('track-title').innerText = "Налаштування...";
-    document.getElementById('track-status').innerText = "Ловимо телевізійну хвилю...";
-    initRadioNoise();
-
-    try {
-        const searchUrl = `https://allorigins.win{encodeURIComponent('https://youtube.com' + trackName)}`;
-        const response = await fetch(searchUrl);
-        const data = await response.json();
-        
-        const match = data.contents.match(/"videoId":"([^"]+)"/);
-        
-        if (match && match) {
-            const videoId = match;
-            
-            // Завантажуємо кліп прямо в нашу красиву рамочку!
-            youtubePlayer.loadVideoById(videoId);
-            
-            document.getElementById('track-title').innerText = trackName;
-            document.getElementById('track-status').innerText = "Сигнал зловучено. Приємного перегляду!";
-        } else {
-            document.getElementById('track-title').innerText = "Хвилю втрачено";
-            document.getElementById('track-status').innerText = "Спробуйте іншу назву";
-        }
-    } catch (error) {
-        console.error(error);
-        document.getElementById('track-title').innerText = "Помилка ТБ сигналу";
-    }
-}
-
+// Залізобетонний пошук без помилок Playback ID
 playBtn.addEventListener('click', () => {
     const query = searchInput.value.trim();
-    if (query && youtubePlayer) {
-        searchAndPlayWithTV(query);
+    if (query) {
+        initRadioNoise(); // Миттєво вмикаємо тріск радіо хвилі
+        
+        document.getElementById('track-title').innerText = query;
+        document.getElementById('track-status').innerText = "Сигнал радіо стабільний";
+        radioBody.classList.add('playing-animation');
+
+        // Використовуємо офіційну вбудовану систему пошуку YouTube: вона сама шукає назву і відтворює перший трек прямо в iframe
+        const tvScreen = document.getElementById('yt-player-visible');
+        tvScreen.innerHTML = `<iframe width="100%" height="100%" src="https://youtube.com{encodeURIComponent(query)}&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>`;
     }
 });
 
